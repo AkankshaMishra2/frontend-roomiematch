@@ -1,29 +1,41 @@
-// src/pages/index.js
-import { useEffect } from 'react';
+'use client';
+
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Head from 'next/head';
 import Link from 'next/link';
-import Layout from '../components/layout/Layout';
-import { useAuth } from '../hooks/useAuth';
+import Layout from '@/components/layout/Layout';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function Home() {
-  const { user } = useAuth();
+  const [user, setUser] = useState(null);
+  
+  // Simulate auth hook (you'll need to implement this properly)
+  useEffect(() => {
+    // Replace with your actual auth implementation
+    const checkAuth = async () => {
+      try {
+        // This is where you'd get the user from your auth system
+        const userData = null; // Set to user data if logged in
+        setUser(userData);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      }
+    };
+    
+    checkAuth();
+  }, []);
 
   return (
     <Layout>
-      <Head>
-        <title>RoomieMatch - Find Your Perfect Roommate</title>
-        <meta name="description" content="Match with compatible roommates using our fun compatibility quiz and chat system." />
-      </Head>
-
+      {/* Note: Head component is removed as App Router uses metadata exports */}
       <section className="px-4 py-16 md:py-24">
         <div className="container mx-auto max-w-6xl">
           <div className="flex flex-col md:flex-row items-center justify-between">
-            <motion.div 
-              className="md:w-1/2 mb-10 md:mb-0"
+            <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
+              className="md:w-1/2 mb-10 md:mb-0"
             >
               <h1 className="mb-6">
                 <span className="funky-text">Find Your</span>{" "}
@@ -54,11 +66,11 @@ export default function Home() {
               </div>
             </motion.div>
 
-            <motion.div 
-              className="md:w-1/2 flex justify-center"
+            <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
+              className="md:w-1/2 flex justify-center"
             >
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-funky-purple to-funky-pink rounded-full blur-3xl opacity-20 animation-float"></div>
@@ -109,23 +121,23 @@ export default function Home() {
 
       <section className="px-4 py-16 bg-gradient-to-br from-funky-purple/10 via-funky-blue/10 to-funky-teal/10">
         <div className="container mx-auto max-w-6xl text-center">
-          <motion.h2 
-            className="mb-12 funky-text"
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
+            className="mb-12 funky-text"
           >
             How RoomieMatch Works
           </motion.h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div 
-              className="card"
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               viewport={{ once: true }}
+              className="card"
             >
               <div className="h-16 w-16 rounded-full bg-funky-purple/20 flex items-center justify-center text-funky-purple text-2xl mb-4 mx-auto">
                 1
